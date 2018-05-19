@@ -1,3 +1,4 @@
+# coding:utf-8
 import requests
 import re
 from bs4 import BeautifulSoup
@@ -36,15 +37,18 @@ def scrapeBook(start):
     for index in range(start, 0, -1):
         if index % 1000 == 0:
             print(index)
+
         # skip if book already in database
         if checkBookExist(index):
-            continue
+            print("read to ", str(index + 1))
+            break
 
         # get the book link.
         currUrl = baseUrl + str(index)
         currPage = requests.get(currUrl).text
         soup = BeautifulSoup(currPage, 'lxml')
         address = soup.select_one("div[class=media]")
+
         # if link not exists, skip current
         if address is None:
             continue
