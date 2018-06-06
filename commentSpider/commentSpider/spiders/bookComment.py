@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 import scrapy
 import datetime
-import commentSpider.items as itemClass
+import commentSpider.items as items
+
 
 class CommentSpider(scrapy.Spider):
     name = "bookComment"
@@ -10,14 +11,14 @@ class CommentSpider(scrapy.Spider):
 
     def parse(self, response):
         selector = scrapy.Selector(response)
-        item = itemClass.CommentSpiderItem()
+        item = items.CommentSpiderItem()
         # read the link of next page button
         baseUrl = 'http://www.yousuu.com/comments?t='
-        pageInfo = selector.css("ul.pagination li a::attr(onclick)").extract()[1]
+        pageInfo = selector.css("ul.pagination li a::attr(onclick)").extract()[
+            1]
 
         # pageInfo sample: ys.common.jumpurl('t','1527969899')
         pageId = ''.join(c for c in pageInfo if c.isdigit())
-
 
         # collect uid of comments in current page
         userLink = selector.css("div.ys-comments-main a::attr(href)").extract()
@@ -38,11 +39,11 @@ class CommentSpider(scrapy.Spider):
         rating = selector.css("span.num2star::text").extract()
 
         # get book id
-        bookLink = selector.css("div.ys-comments-message small a::attr(href)").extract()
+        bookLink = selector.css(
+            "div.ys-comments-message small a::attr(href)").extract()
         bookID = []
         for book in bookLink:
             bookID.append(''.join(c for c in book if c.isdigit()))
-
 
         # get time string and curr time.
         postTime = []
@@ -56,7 +57,6 @@ class CommentSpider(scrapy.Spider):
 
         currTime = datetime.datetime.now().__str__()
         currTimeList = [currTime] * 40
-
 
         # get comments text
         commentList = []
@@ -82,7 +82,7 @@ class CommentSpider(scrapy.Spider):
         item['commentList'] = commentList
         item['bookID'] = bookID
 
-        yield(item)
+        yield (item)
 
         if pageInfo:
             nextPageUrl = baseUrl + pageId

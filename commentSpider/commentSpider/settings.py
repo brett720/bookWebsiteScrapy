@@ -70,7 +70,7 @@ FEED_EXPORT_ENCODING = 'utf-8'
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-   'commentSpider.pipelines.CommentspiderPipeline': 300,
+   'commentSpider.pipelines.CommentSpiderPipeline': 300,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

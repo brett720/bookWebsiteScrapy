@@ -7,13 +7,12 @@
 import codecs
 import json
 
-class CommentspiderPipeline(object):
+
+class CommentSpiderPipeline(object):
     def __init__(self):
         self.file = codecs.open('comments.json', 'a', 'utf8')
 
-
     def process_item(self, item, spider):
-
         username = item['username']
         uid = item['uid']
         rating = item['rating']
@@ -24,7 +23,7 @@ class CommentspiderPipeline(object):
         bookID = item['bookID']
 
         for index in range(len(username)):
-            book = {}
+            book = dict()
             book['username'] = username[index]
             book['uid'] = uid[index]
             book['rating'] = rating[index]
