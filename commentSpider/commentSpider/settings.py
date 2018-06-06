@@ -9,17 +9,22 @@
 #     https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
+
 BOT_NAME = 'commentSpider'
 
 SPIDER_MODULES = ['commentSpider.spiders']
 NEWSPIDER_MODULE = 'commentSpider.spiders'
 
-
+USER_AGENT = 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'commentSpider (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
+FEED_EXPORT_ENCODING = 'utf-8'
+
+# FEED_URI = u'file:///F://workspace/bookWebsiteScrapy/comments.csv'
+# FEED_FORMAT = 'CSV'
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
@@ -64,9 +69,9 @@ ROBOTSTXT_OBEY = True
 
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'commentSpider.pipelines.CommentspiderPipeline': 300,
-#}
+ITEM_PIPELINES = {
+   'commentSpider.pipelines.CommentspiderPipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html

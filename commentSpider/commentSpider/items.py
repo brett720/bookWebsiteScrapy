@@ -8,7 +8,14 @@
 import scrapy
 
 
-class CommentspiderItem(scrapy.Item):
+class CommentSpiderItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
-    pass
+    username = scrapy.Field()
+    uid = scrapy.Field()
+    rating = scrapy.Field()
+    currTime = scrapy.Field()
+    postTime = scrapy.Field()
+    cid = scrapy.Field()
+    commentList = scrapy.Field()
+    bookID = scrapy.Field()
