@@ -1,0 +1,1862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><title>优书网</title>
+    <meta name="renderer" content="webkit">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet"
+          href="//lib.baomitu.com/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet"
+          href="//lib.baomitu.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//img.yousuu.com/css/toastr.min.css">
+    <link rel="stylesheet"
+          href="//lib.baomitu.com/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="//img.yousuu.com/css/bootstrap-switch.min.css">
+    <link rel="stylesheet" href="//img.yousuu.com/my.css?v=1422">
+    <script src="//dup.baidustatic.com/js/ds.js"></script>
+    <!--[if lt IE 8]>
+    <script src="//img.yousuu.com/js/html5shiv.js"></script>
+    <script src="//img.yousuu.com/js/respond.min.js"></script>
+    <script src="//img.yousuu.com/js/excanvas.min.js"></script><![endif]-->
+    <link rel="stylesheet" href="//img.yousuu.com/booklist.css">
+</head>
+<body>
+<header class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button data-toggle="collapse" data-target="#header-navbar"
+                    type="button" class="navbar-toggle"><span class="sr-only">Toggle Navigation</span><span
+                    class="icon-bar"></span><span class="icon-bar"></span><span
+                    class="icon-bar"></span></button>
+            <button data-toggle="collapse" data-target="#notice-navbar"
+                    type="button" id="notice-navbar-button"
+                    class="navbar-toggle notice-navbar-button"><i
+                    class="fa fa-bell"></i></button>
+            <a href="/" style="padding:0;" class="navbar-brand"> <img
+                    src="http://img.lkong.cn/sokk/logo.png" style="height:52px"></a>
+        </div>
+        <div id="notice-navbar" class="hidden-sm hidden-md hidden-lg collapse">
+            <ul class="nav navbar-nav">
+                <li class="smallpadding"><a href="/notice">
+                    通知 <span class="badge ysh-notice-badge"></span></a></li>
+                <li class="smallpadding"><a href="/notice/booklist">
+                    书单 <span class="badge ysh-bl-badge"></span></a></li>
+                <li class="smallpadding"><a href="/user/693716/fans">粉丝 <span
+                        class="badge ysh-fans-badge"></span></a></li>
+            </ul>
+        </div>
+        <div id="header-navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="/booklist">所有书单</a></li>
+                <li class="active"><a href="/comments">小说评论</a></li>
+                <li class="hidden-xs hidden-md"><a href="http://www.lkong.net"
+                                                   target="_blank">龙空论坛</a></li>
+            </ul>
+            <form id="globalsearchform" role="search"
+                  onsubmit="ys.common.globalsearch();return false;"
+                  class="navbar-form navbar-left">
+                <div style="" class="input-group">
+                    <div class="input-group-btn">
+                        <button type="button" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false"
+                                class="btn btn-default dropdown-toggle"><span
+                                id="globalsearchform_typetext">综合</span>&nbsp;<span
+                                class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="javascript:;" data-type="book"
+                                   onclick="ys.common.changeSearchType(this)">书名搜索</a>
+                            </li>
+                            <li><a href="javascript:;" data-type="author"
+                                   onclick="ys.common.changeSearchType(this)">作者搜索</a>
+                            </li>
+                            <li><a href="javascript:;" data-type="booklist"
+                                   onclick="ys.common.changeSearchType(this)">书单搜索</a>
+                            </li>
+                            <li><a href="javascript:;" data-type="user"
+                                   onclick="ys.common.changeSearchType(this)">用户搜索</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li><a href="javascript:;" data-type="all"
+                                   onclick="ys.common.changeSearchType(this)">综合搜索</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <input id="globalsearchtype" type="hidden" name="searchType"
+                           value="all"><input id="globalsearchtxt" type="text"
+                                              name="searchTextInput"
+                                              placeholder="输入书名/作者名/用户/书单"
+                                              class="form-control"><span
+                        class="input-group-btn"><button type="button"
+                                                        onclick="ys.common.globalsearch()"
+                                                        class="btn btn-default">搜索</button></span>
+                </div>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="smallpadding hidden-xs"><a href="/notice"
+                                                      target="_blank">
+                    通知 <span class="badge ysh-notice-badge"></span></a></li>
+                <li class="smallpadding hidden-xs"><a href="/notice/booklist"
+                                                      target="_blank">
+                    书单 <span class="badge ysh-bl-badge"></span></a></li>
+                <li class="smallpadding hidden-xs"><a href="/user/693716/fans"
+                                                      target="_blank">粉丝 <span
+                        class="badge ysh-fans-badge"></span></a></li>
+                <li class="droupdown"><a id="headeruser" data-toggle="dropdown"
+                                         href="/user/693716"
+                                         class="dropdown-toggle">Yukanaaaa<span
+                        class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/user/693716/comments">我的动态</a></li>
+                        <li><a href="/shelf"
+                               style="font-weight:bold;color:#337ab7">个人书架</a>
+                        </li>
+                        <li><a href="/user/693716">我的书单</a></li>
+                        <li><a href="/settings">个人设置</a></li>
+                        <li><a href="#"
+                               onclick="ys.common.logout();return false;">退出登录</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</header>
+<div class="sokk-body">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <div style="margin-bottom:10px;overflow-x:hidden;">
+                    <script>(function () {
+                        var s = "_" + Math.random().toString(36).slice(2);
+                        document.write('<div class="visible-xs-block" id="' + s + '"></div>');
+                        (window.slotbydup = window.slotbydup || []).push({
+                            id: '3147044',
+                            container: s,
+                            size: '20,3',
+                            display: 'inlay-fix'
+                        });
+                    })();</script>
+                    <script>(function () {
+                        var s = "_" + Math.random().toString(36).slice(2);
+                        document.write('<div id="' + s + '"></div>');
+                        (window.slotbydup = window.slotbydup || []).push({
+                            id: '2513412',
+                            container: s,
+                            size: '848,66',
+                            display: 'inlay-fix'
+                        });
+                    })();</script>
+                </div>
+                <div style="margin-bottom:14px" class="smallcenter clearfix">
+                    <div style="margin-right:10px;" class="btn-group"><a
+                            href="/comments" class="btn btn-primary">所有评论</a><a
+                            href="/comments/digest"
+                            class="btn btn-default">精华评论</a></div>
+                    <input type="checkbox" name="switch-checkbox"
+                           data-on-text="文字模式" data-off-text="图文模式"
+                           data-label-width="10px" id="switchViewComment"
+                           checked>
+                    <div class="right2center smallcenter">
+                        <ul class="pagination">
+                            <li class="active"><a href="javascript:;"
+                                                  onclick="ys.common.jumpurl('t',null)">
+                                首页</a></li>
+                            <li><a href="javascript:;"
+                                   onclick="ys.common.jumpurl('t','1528248450')">下一页</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <ul class="media-list ys-comments">
+                    <li class="media ys-comments-left">
+                        <div style="margin-right:5px;" class="ys-comments-main">
+                            <a href="/user/860617/comments" target="_blank"
+                               class="hidden-xs ys-comments-user ys-comments-layout-x"><img
+                                    src="http://img.lkong.cn/avatar/000/86/06/17_avatar_small.jpg"
+                                    onerror="this.src='http://img.lkong.cn/avatar/noavatar_small.png';this.onerror=null;"
+                                    class="media-object img-rounded"></a>
+                            <div class="media-body">
+                                <h5 class="media-heading"><a
+                                        href="/user/860617/comments"
+                                        target="_blank">荧惑mars</a>
+                                    <small style="margin-left:1em;">
+                                        1 分钟前 评了<span class="num2star">3</span>
+                                    </small>
+                                </h5>
+                                <div class="ys-comments-message"><p>
+                                    作者在做什么呢，又在刷微博。有空闲时间，快来写作啊！不写会懒惰的啊！和北雄作者一个样，一断更就…… </p>
+                                    <small>&nbsp;(本书评来自于 <a target="_blank"
+                                                            href="/book/7139">《三国之最风流》 </a>)
+                                    </small>
+                                </div>
+                                <div data-cid="5b17460c6e7c5971660f638d"
+                                     role="group"
+                                     class="ys-comments-btns pull-right btn-group">
+                                    <button type="button"
+                                            onclick="ys.common.loveonecomment(this)"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-heart-o"></i>&nbsp;喜欢
+                                        <span class="num"> </span></button>
+                                    <button type="button"
+                                            onclick="ys.common.viewOneComment('5b17460c6e7c5971660f638d')"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-reply"></i>&nbsp;评论<span
+                                            class="num"> </span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="media ys-comments-left">
+                        <div style="margin-right:5px;" class="ys-comments-main">
+                            <a href="/user/826650/comments" target="_blank"
+                               class="hidden-xs ys-comments-user ys-comments-layout-x"><img
+                                    src="http://img.lkong.cn/avatar/000/82/66/50_avatar_small.jpg"
+                                    onerror="this.src='http://img.lkong.cn/avatar/noavatar_small.png';this.onerror=null;"
+                                    class="media-object img-rounded"></a>
+                            <div class="media-body">
+                                <h5 class="media-heading"><a
+                                        href="/user/826650/comments"
+                                        target="_blank">阴影下的微笑</a>
+                                    <small style="margin-left:1em;">
+                                        2 分钟前 评了<span class="num2star">5</span>
+                                    </small>
+                                </h5>
+                                <div class="ys-comments-message"><p>
+                                    在我看来比三国之最风流节奏更紧凑，更有趣，每章末的后记也让人会心一笑，仙草 </p>
+                                    <small>&nbsp;(本书评来自于 <a target="_blank"
+                                                            href="/book/139123">《覆汉》 </a>)
+                                    </small>
+                                </div>
+                                <div data-cid="5b1746018182586b66cc3a4d"
+                                     role="group"
+                                     class="ys-comments-btns pull-right btn-group">
+                                    <button type="button"
+                                            onclick="ys.common.loveonecomment(this)"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-heart-o"></i>&nbsp;喜欢
+                                        <span class="num"> </span></button>
+                                    <button type="button"
+                                            onclick="ys.common.viewOneComment('5b1746018182586b66cc3a4d')"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-reply"></i>&nbsp;评论<span
+                                            class="num"> </span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="media ys-comments-left">
+                        <div style="margin-right:5px;" class="ys-comments-main">
+                            <a href="/user/860617/comments" target="_blank"
+                               class="hidden-xs ys-comments-user ys-comments-layout-x"><img
+                                    src="http://img.lkong.cn/avatar/000/86/06/17_avatar_small.jpg"
+                                    onerror="this.src='http://img.lkong.cn/avatar/noavatar_small.png';this.onerror=null;"
+                                    class="media-object img-rounded"></a>
+                            <div class="media-body">
+                                <h5 class="media-heading"><a
+                                        href="/user/860617/comments"
+                                        target="_blank">荧惑mars</a>
+                                    <small style="margin-left:1em;">
+                                        3 分钟前 评了<span class="num2star">3</span>
+                                    </small>
+                                </h5>
+                                <div class="ys-comments-message"><p>
+                                    不知道怎么回事……这本书我就想着存着再看。不着急。 </p>
+                                    <small>&nbsp;(本书评来自于 <a target="_blank"
+                                                            href="/book/2225">《赘婿》 </a>)
+                                    </small>
+                                </div>
+                                <div data-cid="5b1745a4b150029b66bde158"
+                                     role="group"
+                                     class="ys-comments-btns pull-right btn-group">
+                                    <button type="button"
+                                            onclick="ys.common.loveonecomment(this)"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-heart-o"></i>&nbsp;喜欢
+                                        <span class="num"> </span></button>
+                                    <button type="button"
+                                            onclick="ys.common.viewOneComment('5b1745a4b150029b66bde158')"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-reply"></i>&nbsp;评论<span
+                                            class="num"> </span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="media ys-comments-left">
+                        <div style="margin-right:5px;" class="ys-comments-main">
+                            <a href="/user/860617/comments" target="_blank"
+                               class="hidden-xs ys-comments-user ys-comments-layout-x"><img
+                                    src="http://img.lkong.cn/avatar/000/86/06/17_avatar_small.jpg"
+                                    onerror="this.src='http://img.lkong.cn/avatar/noavatar_small.png';this.onerror=null;"
+                                    class="media-object img-rounded"></a>
+                            <div class="media-body">
+                                <h5 class="media-heading"><a
+                                        href="/user/860617/comments"
+                                        target="_blank">荧惑mars</a>
+                                    <small style="margin-left:1em;">
+                                        4 分钟前 评了<span class="num2star">4</span>
+                                    </small>
+                                </h5>
+                                <div class="ys-comments-message"><p>
+                                    咱们先不要抓着姐姐不放，也不要抓着结尾不放。其他写的，真的很好啊！春秋战国，荣耀和野心，这才是大争之世么。 </p>
+                                    <small>&nbsp;(本书评来自于 <a target="_blank"
+                                                            href="/book/30909">《春秋我为王》 </a>)
+                                    </small>
+                                </div>
+                                <div data-cid="5b1745778182586b66cc3a48"
+                                     role="group"
+                                     class="ys-comments-btns pull-right btn-group">
+                                    <button type="button"
+                                            onclick="ys.common.loveonecomment(this)"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-heart-o"></i>&nbsp;喜欢
+                                        <span class="num"> 1  </span></button>
+                                    <button type="button"
+                                            onclick="ys.common.viewOneComment('5b1745778182586b66cc3a48')"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-reply"></i>&nbsp;评论<span
+                                            class="num"> </span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="media ys-comments-left">
+                        <div style="margin-right:5px;" class="ys-comments-main">
+                            <a href="/user/962511/comments" target="_blank"
+                               class="hidden-xs ys-comments-user ys-comments-layout-x"><img
+                                    src="http://img.lkong.cn/avatar/000/96/25/11_avatar_small.jpg"
+                                    onerror="this.src='http://img.lkong.cn/avatar/noavatar_small.png';this.onerror=null;"
+                                    class="media-object img-rounded"></a>
+                            <div class="media-body">
+                                <h5 class="media-heading"><a
+                                        href="/user/962511/comments"
+                                        target="_blank">夏虫二</a>
+                                    <small style="margin-left:1em;">
+                                        4 分钟前 评了<span class="num2star">3</span>
+                                    </small>
+                                </h5>
+                                <div class="ys-comments-message"><p>
+                                    大概还是很难喜欢的起来男频文中的女主，写的真是get不到任何好感 </p>
+                                    <small>&nbsp;(本书评来自于 <a target="_blank"
+                                                            href="/book/139984">《这个明星来自地球》 </a>)
+                                    </small>
+                                </div>
+                                <div data-cid="5b1745637aeff765661283ad"
+                                     role="group"
+                                     class="ys-comments-btns pull-right btn-group">
+                                    <button type="button"
+                                            onclick="ys.common.loveonecomment(this)"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-heart-o"></i>&nbsp;喜欢
+                                        <span class="num"> </span></button>
+                                    <button type="button"
+                                            onclick="ys.common.viewOneComment('5b1745637aeff765661283ad')"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-reply"></i>&nbsp;评论<span
+                                            class="num"> </span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="media ys-comments-left">
+                        <div style="margin-right:5px;" class="ys-comments-main">
+                            <a href="/user/860617/comments" target="_blank"
+                               class="hidden-xs ys-comments-user ys-comments-layout-x"><img
+                                    src="http://img.lkong.cn/avatar/000/86/06/17_avatar_small.jpg"
+                                    onerror="this.src='http://img.lkong.cn/avatar/noavatar_small.png';this.onerror=null;"
+                                    class="media-object img-rounded"></a>
+                            <div class="media-body">
+                                <h5 class="media-heading"><a
+                                        href="/user/860617/comments"
+                                        target="_blank">荧惑mars</a>
+                                    <small style="margin-left:1em;">
+                                        5 分钟前 评了<span class="num2star">3</span>
+                                    </small>
+                                </h5>
+                                <div class="ys-comments-message"><p>
+                                    穿越一个字，爽。没了。历史背景写的够详细，然而很多都是“论坛”脑补。 </p>
+                                    <small>&nbsp;(本书评来自于 <a target="_blank"
+                                                            href="/book/1536">《大秦帝国风云录》 </a>)
+                                    </small>
+                                </div>
+                                <div data-cid="5b174519b150029b66bde14c"
+                                     role="group"
+                                     class="ys-comments-btns pull-right btn-group">
+                                    <button type="button"
+                                            onclick="ys.common.loveonecomment(this)"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-heart-o"></i>&nbsp;喜欢
+                                        <span class="num"> </span></button>
+                                    <button type="button"
+                                            onclick="ys.common.viewOneComment('5b174519b150029b66bde14c')"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-reply"></i>&nbsp;评论<span
+                                            class="num"> </span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="media ys-comments-left">
+                        <div style="margin-right:5px;" class="ys-comments-main">
+                            <a href="/user/860617/comments" target="_blank"
+                               class="hidden-xs ys-comments-user ys-comments-layout-x"><img
+                                    src="http://img.lkong.cn/avatar/000/86/06/17_avatar_small.jpg"
+                                    onerror="this.src='http://img.lkong.cn/avatar/noavatar_small.png';this.onerror=null;"
+                                    class="media-object img-rounded"></a>
+                            <div class="media-body">
+                                <h5 class="media-heading"><a
+                                        href="/user/860617/comments"
+                                        target="_blank">荧惑mars</a>
+                                    <small style="margin-left:1em;">
+                                        7 分钟前 评了<span class="num2star">3</span>
+                                    </small>
+                                </h5>
+                                <div class="ys-comments-message"><p>
+                                    作者也是一个历史宅，名门望族内部的勾心斗角，折射出当代明朝的现状。权当消遣一看，挺好。 </p>
+                                    <small>&nbsp;(本书评来自于 <a target="_blank"
+                                                            href="/book/22218">《大明望族》 </a>)
+                                    </small>
+                                </div>
+                                <div data-cid="5b1744c0c5cc148366c24133"
+                                     role="group"
+                                     class="ys-comments-btns pull-right btn-group">
+                                    <button type="button"
+                                            onclick="ys.common.loveonecomment(this)"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-heart-o"></i>&nbsp;喜欢
+                                        <span class="num"> </span></button>
+                                    <button type="button"
+                                            onclick="ys.common.viewOneComment('5b1744c0c5cc148366c24133')"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-reply"></i>&nbsp;评论<span
+                                            class="num"> </span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="media ys-comments-left">
+                        <div style="margin-right:5px;" class="ys-comments-main">
+                            <a href="/user/911884/comments" target="_blank"
+                               class="hidden-xs ys-comments-user ys-comments-layout-x"><img
+                                    src="http://img.lkong.cn/avatar/000/91/18/84_avatar_small.jpg"
+                                    onerror="this.src='http://img.lkong.cn/avatar/noavatar_small.png';this.onerror=null;"
+                                    class="media-object img-rounded"></a>
+                            <div class="media-body">
+                                <h5 class="media-heading"><a
+                                        href="/user/911884/comments"
+                                        target="_blank">liyu101</a>
+                                    <small style="margin-left:1em;">
+                                        9 分钟前 评了<span class="num2star">5</span>
+                                    </small>
+                                </h5>
+                                <div class="ys-comments-message"><p>
+                                    个人认为是猫腻最好的一本，人物鲜明，故事勾人。二十七杯酒的淡淡文青贯穿全文，非但不让人反感，反而增添感动。间客之前，猫腻的故事太简单；间客之后，猫腻的文青病又太重了。 </p>
+                                    <small>&nbsp;(本书评来自于 <a target="_blank"
+                                                            href="/book/186">《间客》 </a>)
+                                    </small>
+                                </div>
+                                <div data-cid="5b17445f8182586b66cc3a3c"
+                                     role="group"
+                                     class="ys-comments-btns pull-right btn-group">
+                                    <button type="button"
+                                            onclick="ys.common.loveonecomment(this)"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-heart-o"></i>&nbsp;喜欢
+                                        <span class="num"> </span></button>
+                                    <button type="button"
+                                            onclick="ys.common.viewOneComment('5b17445f8182586b66cc3a3c')"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-reply"></i>&nbsp;评论<span
+                                            class="num"> </span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="media ys-comments-left">
+                        <div style="margin-right:5px;" class="ys-comments-main">
+                            <a href="/user/860617/comments" target="_blank"
+                               class="hidden-xs ys-comments-user ys-comments-layout-x"><img
+                                    src="http://img.lkong.cn/avatar/000/86/06/17_avatar_small.jpg"
+                                    onerror="this.src='http://img.lkong.cn/avatar/noavatar_small.png';this.onerror=null;"
+                                    class="media-object img-rounded"></a>
+                            <div class="media-body">
+                                <h5 class="media-heading"><a
+                                        href="/user/860617/comments"
+                                        target="_blank">荧惑mars</a>
+                                    <small style="margin-left:1em;">
+                                        9 分钟前 评了<span class="num2star">3</span>
+                                    </small>
+                                </h5>
+                                <div class="ys-comments-message"><p>
+                                    够“乱”！老佛爷都不放过！然而美利坚南北战争那一段，我觉得可以再深入写写，有点“简单”。其次，对于自己本土，呃……穿越么，金手指么……权当消遣一看。 </p>
+                                    <small>&nbsp;(本书评来自于 <a target="_blank"
+                                                            href="/book/18070">《乱清》 </a>)
+                                    </small>
+                                </div>
+                                <div data-cid="5b1744318182586b66cc3a31"
+                                     role="group"
+                                     class="ys-comments-btns pull-right btn-group">
+                                    <button type="button"
+                                            onclick="ys.common.loveonecomment(this)"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-heart-o"></i>&nbsp;喜欢
+                                        <span class="num"> </span></button>
+                                    <button type="button"
+                                            onclick="ys.common.viewOneComment('5b1744318182586b66cc3a31')"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-reply"></i>&nbsp;评论<span
+                                            class="num"> </span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="media ys-comments-left">
+                        <div style="margin-right:5px;" class="ys-comments-main">
+                            <a href="/user/860617/comments" target="_blank"
+                               class="hidden-xs ys-comments-user ys-comments-layout-x"><img
+                                    src="http://img.lkong.cn/avatar/000/86/06/17_avatar_small.jpg"
+                                    onerror="this.src='http://img.lkong.cn/avatar/noavatar_small.png';this.onerror=null;"
+                                    class="media-object img-rounded"></a>
+                            <div class="media-body">
+                                <h5 class="media-heading"><a
+                                        href="/user/860617/comments"
+                                        target="_blank">荧惑mars</a>
+                                    <small style="margin-left:1em;">
+                                        11 分钟前 评了<span class="num2star">3</span>
+                                    </small>
+                                </h5>
+                                <div class="ys-comments-message"><p>
+                                    等着慢慢看……现在还是铺垫啊 </p>
+                                    <small>&nbsp;(本书评来自于 <a target="_blank"
+                                                            href="/book/143852">《獒唐》 </a>)
+                                    </small>
+                                </div>
+                                <div data-cid="5b1743bfe71cc87d66c6038c"
+                                     role="group"
+                                     class="ys-comments-btns pull-right btn-group">
+                                    <button type="button"
+                                            onclick="ys.common.loveonecomment(this)"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-heart-o"></i>&nbsp;喜欢
+                                        <span class="num"> </span></button>
+                                    <button type="button"
+                                            onclick="ys.common.viewOneComment('5b1743bfe71cc87d66c6038c')"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-reply"></i>&nbsp;评论<span
+                                            class="num"> </span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="media ys-comments-left">
+                        <div style="margin-right:5px;" class="ys-comments-main">
+                            <a href="/user/860617/comments" target="_blank"
+                               class="hidden-xs ys-comments-user ys-comments-layout-x"><img
+                                    src="http://img.lkong.cn/avatar/000/86/06/17_avatar_small.jpg"
+                                    onerror="this.src='http://img.lkong.cn/avatar/noavatar_small.png';this.onerror=null;"
+                                    class="media-object img-rounded"></a>
+                            <div class="media-body">
+                                <h5 class="media-heading"><a
+                                        href="/user/860617/comments"
+                                        target="_blank">荧惑mars</a>
+                                    <small style="margin-left:1em;">
+                                        12 分钟前 评了<span class="num2star">5</span>
+                                    </small>
+                                </h5>
+                                <div class="ys-comments-message"><p>
+                                    金手指肯定有啊。然而历史而言，权谋才是历史的主角。你们的重点在哪里！ </p>
+                                    <small>&nbsp;(本书评来自于 <a target="_blank"
+                                                            href="/book/165">《宰执天下》 </a>)
+                                    </small>
+                                </div>
+                                <div data-cid="5b174397b150029b66bde137"
+                                     role="group"
+                                     class="ys-comments-btns pull-right btn-group">
+                                    <button type="button"
+                                            onclick="ys.common.loveonecomment(this)"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-heart-o"></i>&nbsp;喜欢
+                                        <span class="num"> </span></button>
+                                    <button type="button"
+                                            onclick="ys.common.viewOneComment('5b174397b150029b66bde137')"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-reply"></i>&nbsp;评论<span
+                                            class="num"> </span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="media ys-comments-left">
+                        <div style="margin-right:5px;" class="ys-comments-main">
+                            <a href="/user/911884/comments" target="_blank"
+                               class="hidden-xs ys-comments-user ys-comments-layout-x"><img
+                                    src="http://img.lkong.cn/avatar/000/91/18/84_avatar_small.jpg"
+                                    onerror="this.src='http://img.lkong.cn/avatar/noavatar_small.png';this.onerror=null;"
+                                    class="media-object img-rounded"></a>
+                            <div class="media-body">
+                                <h5 class="media-heading"><a
+                                        href="/user/911884/comments"
+                                        target="_blank">liyu101</a>
+                                    <small style="margin-left:1em;">
+                                        13 分钟前 评了<span class="num2star">5</span>
+                                    </small>
+                                </h5>
+                                <div class="ys-comments-message"><p>
+                                    这是所有仙侠文中最具仙气的一本，文字之仙味盎然，让人一看三叹，真不相信是个理工男写的。 </p>
+                                    <small>&nbsp;(本书评来自于 <a target="_blank"
+                                                            href="/book/301">《仙路烟尘》 </a>)
+                                    </small>
+                                </div>
+                                <div data-cid="5b17434cd19a13956638a940"
+                                     role="group"
+                                     class="ys-comments-btns pull-right btn-group">
+                                    <button type="button"
+                                            onclick="ys.common.loveonecomment(this)"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-heart-o"></i>&nbsp;喜欢
+                                        <span class="num"> </span></button>
+                                    <button type="button"
+                                            onclick="ys.common.viewOneComment('5b17434cd19a13956638a940')"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-reply"></i>&nbsp;评论<span
+                                            class="num"> </span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="media ys-comments-left">
+                        <div style="margin-right:5px;" class="ys-comments-main">
+                            <a href="/user/860617/comments" target="_blank"
+                               class="hidden-xs ys-comments-user ys-comments-layout-x"><img
+                                    src="http://img.lkong.cn/avatar/000/86/06/17_avatar_small.jpg"
+                                    onerror="this.src='http://img.lkong.cn/avatar/noavatar_small.png';this.onerror=null;"
+                                    class="media-object img-rounded"></a>
+                            <div class="media-body">
+                                <h5 class="media-heading"><a
+                                        href="/user/860617/comments"
+                                        target="_blank">荧惑mars</a>
+                                    <small style="margin-left:1em;">
+                                        14 分钟前 评了<span class="num2star">5</span>
+                                    </small>
+                                </h5>
+                                <div class="ys-comments-message"><p>
+                                    临高五百元老，你们的思路极大的拓宽了穿越文的写作思路，这也是一条智慧之路，需要带着脑子去看本书。 </p>
+                                    <small>&nbsp;(本书评来自于 <a target="_blank"
+                                                            href="/book/206">《临高启明》 </a>)
+                                    </small>
+                                </div>
+                                <div data-cid="5b174336b150029b66bde12f"
+                                     role="group"
+                                     class="ys-comments-btns pull-right btn-group">
+                                    <button type="button"
+                                            onclick="ys.common.loveonecomment(this)"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-heart-o"></i>&nbsp;喜欢
+                                        <span class="num"> </span></button>
+                                    <button type="button"
+                                            onclick="ys.common.viewOneComment('5b174336b150029b66bde12f')"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-reply"></i>&nbsp;评论<span
+                                            class="num"> </span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="media ys-comments-left">
+                        <div style="margin-right:5px;" class="ys-comments-main">
+                            <a href="/user/1051315/comments" target="_blank"
+                               class="hidden-xs ys-comments-user ys-comments-layout-x"><img
+                                    src="http://img.lkong.cn/avatar/001/05/13/15_avatar_small.jpg"
+                                    onerror="this.src='http://img.lkong.cn/avatar/noavatar_small.png';this.onerror=null;"
+                                    class="media-object img-rounded"></a>
+                            <div class="media-body">
+                                <h5 class="media-heading"><a
+                                        href="/user/1051315/comments"
+                                        target="_blank">夜夜夜夜小白</a>
+                                    <small style="margin-left:1em;">
+                                        16 分钟前 评了<span class="num2star">5</span>
+                                    </small>
+                                </h5>
+                                <div class="ys-comments-message"><p>
+                                    大男主文
+                                    就一直没有看的经典老文，写武侠写的这么好看真难得（请不要看到武侠两个字就跑了，区别于一般的武侠很有自己的想法的故事），目前看了10分之2
+                                    不知道结局会不会崩 但现在看的很开心 男主角的形象性格饱满 配角故事悬疑设计出彩
+                                    PS我觉得作者有隐藏的“腐女之友”属性 就看着双胞胎小哥俩
+                                    和开始戏份很多的尖脸男都感觉腐味十足 哈哈哈 </p>
+                                    <small>&nbsp;(本书评来自于 <a target="_blank"
+                                                            href="/book/13166">《死人经》 </a>)
+                                    </small>
+                                </div>
+                                <div data-cid="5b1742aac5cc148366c24122"
+                                     role="group"
+                                     class="ys-comments-btns pull-right btn-group">
+                                    <button type="button"
+                                            onclick="ys.common.loveonecomment(this)"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-heart-o"></i>&nbsp;喜欢
+                                        <span class="num"> </span></button>
+                                    <button type="button"
+                                            onclick="ys.common.viewOneComment('5b1742aac5cc148366c24122')"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-reply"></i>&nbsp;评论<span
+                                            class="num"> </span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="media ys-comments-left">
+                        <div style="margin-right:5px;" class="ys-comments-main">
+                            <a href="/user/1032588/comments" target="_blank"
+                               class="hidden-xs ys-comments-user ys-comments-layout-x"><img
+                                    src="http://img.lkong.cn/avatar/001/03/25/88_avatar_small.jpg"
+                                    onerror="this.src='http://img.lkong.cn/avatar/noavatar_small.png';this.onerror=null;"
+                                    class="media-object img-rounded"></a>
+                            <div class="media-body">
+                                <h5 class="media-heading"><a
+                                        href="/user/1032588/comments"
+                                        target="_blank">尖尖碰碰拳</a>
+                                    <small style="margin-left:1em;">
+                                        17 分钟前 评了<span class="num2star">1</span>
+                                    </small>
+                                </h5>
+                                <div class="ys-comments-message"><p>
+                                    这种上了美女杀手的桥段怕不是十年前的。真不怕把你jj咬下来 </p>
+                                    <small>&nbsp;(本书评来自于 <a target="_blank"
+                                                            href="/book/146322">《大神主系统》 </a>)
+                                    </small>
+                                </div>
+                                <div data-cid="5b1742787ca9548f6608f843"
+                                     role="group"
+                                     class="ys-comments-btns pull-right btn-group">
+                                    <button type="button"
+                                            onclick="ys.common.loveonecomment(this)"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-heart-o"></i>&nbsp;喜欢
+                                        <span class="num"> </span></button>
+                                    <button type="button"
+                                            onclick="ys.common.viewOneComment('5b1742787ca9548f6608f843')"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-reply"></i>&nbsp;评论<span
+                                            class="num"> </span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="media ys-comments-left">
+                        <div style="margin-right:5px;" class="ys-comments-main">
+                            <a href="/user/911884/comments" target="_blank"
+                               class="hidden-xs ys-comments-user ys-comments-layout-x"><img
+                                    src="http://img.lkong.cn/avatar/000/91/18/84_avatar_small.jpg"
+                                    onerror="this.src='http://img.lkong.cn/avatar/noavatar_small.png';this.onerror=null;"
+                                    class="media-object img-rounded"></a>
+                            <div class="media-body">
+                                <h5 class="media-heading"><a
+                                        href="/user/911884/comments"
+                                        target="_blank">liyu101</a>
+                                    <small style="margin-left:1em;">
+                                        17 分钟前 评了<span class="num2star">5</span>
+                                    </small>
+                                </h5>
+                                <div class="ys-comments-message"><p>
+                                    远古神作，我觉得是蛤蟆最好的一本，反正当年看很过瘾。 </p>
+                                    <small>&nbsp;(本书评来自于 <a target="_blank"
+                                                            href="/book/356">《天鹏纵横》 </a>)
+                                    </small>
+                                </div>
+                                <div data-cid="5b174274977535776655eea3"
+                                     role="group"
+                                     class="ys-comments-btns pull-right btn-group">
+                                    <button type="button"
+                                            onclick="ys.common.loveonecomment(this)"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-heart-o"></i>&nbsp;喜欢
+                                        <span class="num"> </span></button>
+                                    <button type="button"
+                                            onclick="ys.common.viewOneComment('5b174274977535776655eea3')"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-reply"></i>&nbsp;评论<span
+                                            class="num"> </span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="media ys-comments-left">
+                        <div style="margin-right:5px;" class="ys-comments-main">
+                            <a href="/user/735707/comments" target="_blank"
+                               class="hidden-xs ys-comments-user ys-comments-layout-x"><img
+                                    src="http://img.lkong.cn/avatar/000/73/57/07_avatar_small.jpg"
+                                    onerror="this.src='http://img.lkong.cn/avatar/noavatar_small.png';this.onerror=null;"
+                                    class="media-object img-rounded"></a>
+                            <div class="media-body">
+                                <h5 class="media-heading"><a
+                                        href="/user/735707/comments"
+                                        target="_blank">SFA</a>
+                                    <small style="margin-left:1em;">
+                                        17 分钟前 评了<span class="num2star">3</span>
+                                    </small>
+                                </h5>
+                                <div class="ys-comments-message"><p>
+                                    只评书！将夜是一本前期用文笔和剧情让你渐入佳境，然后猝不及防地喂你一把屎。完事儿作者还自以为很有深度，这么跌宕起伏的剧情你们凭什么不喜欢。对此我只想说：wqnnd文青癌！！ </p>
+                                    <small>&nbsp;(本书评来自于 <a target="_blank"
+                                                            href="/book/3898">《将夜》 </a>)
+                                    </small>
+                                </div>
+                                <div data-cid="5b174259d19a13956638a933"
+                                     role="group"
+                                     class="ys-comments-btns pull-right btn-group">
+                                    <button type="button"
+                                            onclick="ys.common.loveonecomment(this)"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-heart-o"></i>&nbsp;喜欢
+                                        <span class="num"> </span></button>
+                                    <button type="button"
+                                            onclick="ys.common.viewOneComment('5b174259d19a13956638a933')"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-reply"></i>&nbsp;评论<span
+                                            class="num"> </span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="media ys-comments-left">
+                        <div style="margin-right:5px;" class="ys-comments-main">
+                            <a href="/user/877830/comments" target="_blank"
+                               class="hidden-xs ys-comments-user ys-comments-layout-x"><img
+                                    src="http://img.lkong.cn/avatar/000/87/78/30_avatar_small.jpg"
+                                    onerror="this.src='http://img.lkong.cn/avatar/noavatar_small.png';this.onerror=null;"
+                                    class="media-object img-rounded"></a>
+                            <div class="media-body">
+                                <h5 class="media-heading"><a
+                                        href="/user/877830/comments"
+                                        target="_blank">会翻身的咸鱼</a>
+                                    <small style="margin-left:1em;">
+                                        17 分钟前 评了<span class="num2star">3</span>
+                                    </small>
+                                </h5>
+                                <div class="ys-comments-message"><p>
+                                    书看完了，后期我无力吐槽，对我来说是毒草，有些地方还是精彩的，只是逆袭的逻辑我不能苟同。 </p>
+                                    <small>&nbsp;(本书评来自于 <a target="_blank"
+                                                            href="/book/123068">《大帝姬》 </a>)
+                                    </small>
+                                </div>
+                                <div data-cid="5b17425395907e896609f84c"
+                                     role="group"
+                                     class="ys-comments-btns pull-right btn-group">
+                                    <button type="button"
+                                            onclick="ys.common.loveonecomment(this)"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-heart-o"></i>&nbsp;喜欢
+                                        <span class="num"> </span></button>
+                                    <button type="button"
+                                            onclick="ys.common.viewOneComment('5b17425395907e896609f84c')"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-reply"></i>&nbsp;评论<span
+                                            class="num"> </span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="media ys-comments-left">
+                        <div style="margin-right:5px;" class="ys-comments-main">
+                            <a href="/user/1032588/comments" target="_blank"
+                               class="hidden-xs ys-comments-user ys-comments-layout-x"><img
+                                    src="http://img.lkong.cn/avatar/001/03/25/88_avatar_small.jpg"
+                                    onerror="this.src='http://img.lkong.cn/avatar/noavatar_small.png';this.onerror=null;"
+                                    class="media-object img-rounded"></a>
+                            <div class="media-body">
+                                <h5 class="media-heading"><a
+                                        href="/user/1032588/comments"
+                                        target="_blank">尖尖碰碰拳</a>
+                                    <small style="margin-left:1em;">
+                                        18 分钟前 评了<span class="num2star">1</span>
+                                    </small>
+                                </h5>
+                                <div class="ys-comments-message"><p>
+                                    智障 </p>
+                                    <small>&nbsp;(本书评来自于 <a target="_blank"
+                                                            href="/book/146322">《大神主系统》 </a>)
+                                    </small>
+                                </div>
+                                <div data-cid="5b1742156e7c5971660f6360"
+                                     role="group"
+                                     class="ys-comments-btns pull-right btn-group">
+                                    <button type="button"
+                                            onclick="ys.common.loveonecomment(this)"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-heart-o"></i>&nbsp;喜欢
+                                        <span class="num"> </span></button>
+                                    <button type="button"
+                                            onclick="ys.common.viewOneComment('5b1742156e7c5971660f6360')"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-reply"></i>&nbsp;评论<span
+                                            class="num"> </span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="media ys-comments-left">
+                        <div style="margin-right:5px;" class="ys-comments-main">
+                            <a href="/user/860617/comments" target="_blank"
+                               class="hidden-xs ys-comments-user ys-comments-layout-x"><img
+                                    src="http://img.lkong.cn/avatar/000/86/06/17_avatar_small.jpg"
+                                    onerror="this.src='http://img.lkong.cn/avatar/noavatar_small.png';this.onerror=null;"
+                                    class="media-object img-rounded"></a>
+                            <div class="media-body">
+                                <h5 class="media-heading"><a
+                                        href="/user/860617/comments"
+                                        target="_blank">荧惑mars</a>
+                                    <small style="margin-left:1em;">
+                                        19 分钟前 评了<span class="num2star">5</span>
+                                    </small>
+                                </h5>
+                                <div class="ys-comments-message"><p>
+                                    老式穿越爽文，写得非常好，不会有“历史的厚重感”，然而圣母……算了，圣母玛利亚只能被跪拜。 </p>
+                                    <small>&nbsp;(本书评来自于 <a target="_blank"
+                                                            href="/book/35270">《唐朝工科生》 </a>)
+                                    </small>
+                                </div>
+                                <div data-cid="5b1741f9c5cc148366c24118"
+                                     role="group"
+                                     class="ys-comments-btns pull-right btn-group">
+                                    <button type="button"
+                                            onclick="ys.common.loveonecomment(this)"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-heart-o"></i>&nbsp;喜欢
+                                        <span class="num"> </span></button>
+                                    <button type="button"
+                                            onclick="ys.common.viewOneComment('5b1741f9c5cc148366c24118')"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-reply"></i>&nbsp;评论<span
+                                            class="num"> </span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="media ys-comments-left">
+                        <div style="margin-right:5px;" class="ys-comments-main">
+                            <a href="/user/1032588/comments" target="_blank"
+                               class="hidden-xs ys-comments-user ys-comments-layout-x"><img
+                                    src="http://img.lkong.cn/avatar/001/03/25/88_avatar_small.jpg"
+                                    onerror="this.src='http://img.lkong.cn/avatar/noavatar_small.png';this.onerror=null;"
+                                    class="media-object img-rounded"></a>
+                            <div class="media-body">
+                                <h5 class="media-heading"><a
+                                        href="/user/1032588/comments"
+                                        target="_blank">尖尖碰碰拳</a>
+                                    <small style="margin-left:1em;">
+                                        21 分钟前 评了<span class="num2star">2</span>
+                                    </small>
+                                </h5>
+                                <div class="ys-comments-message"><p>
+                                    白 </p>
+                                    <small>&nbsp;(本书评来自于 <a target="_blank"
+                                                            href="/book/146322">《大神主系统》 </a>)
+                                    </small>
+                                </div>
+                                <div data-cid="5b1741938182586b66cc3a11"
+                                     role="group"
+                                     class="ys-comments-btns pull-right btn-group">
+                                    <button type="button"
+                                            onclick="ys.common.loveonecomment(this)"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-heart-o"></i>&nbsp;喜欢
+                                        <span class="num"> </span></button>
+                                    <button type="button"
+                                            onclick="ys.common.viewOneComment('5b1741938182586b66cc3a11')"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-reply"></i>&nbsp;评论<span
+                                            class="num"> </span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="media ys-comments-left">
+                        <div style="margin-right:5px;" class="ys-comments-main">
+                            <a href="/user/860617/comments" target="_blank"
+                               class="hidden-xs ys-comments-user ys-comments-layout-x"><img
+                                    src="http://img.lkong.cn/avatar/000/86/06/17_avatar_small.jpg"
+                                    onerror="this.src='http://img.lkong.cn/avatar/noavatar_small.png';this.onerror=null;"
+                                    class="media-object img-rounded"></a>
+                            <div class="media-body">
+                                <h5 class="media-heading"><a
+                                        href="/user/860617/comments"
+                                        target="_blank">荧惑mars</a>
+                                    <small style="margin-left:1em;">
+                                        21 分钟前 评了<span class="num2star">4</span>
+                                    </small>
+                                </h5>
+                                <div class="ys-comments-message"><p>
+                                    都说了功利学啦，这群人怎么就没明白作者的心思呢。 </p>
+                                    <small>&nbsp;(本书评来自于 <a target="_blank"
+                                                            href="/book/33118">《大明文魁》 </a>)
+                                    </small>
+                                </div>
+                                <div data-cid="5b17415b6e7c5971660f6359"
+                                     role="group"
+                                     class="ys-comments-btns pull-right btn-group">
+                                    <button type="button"
+                                            onclick="ys.common.loveonecomment(this)"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-heart-o"></i>&nbsp;喜欢
+                                        <span class="num"> </span></button>
+                                    <button type="button"
+                                            onclick="ys.common.viewOneComment('5b17415b6e7c5971660f6359')"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-reply"></i>&nbsp;评论<span
+                                            class="num"> </span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="media ys-comments-left">
+                        <div style="margin-right:5px;" class="ys-comments-main">
+                            <a href="/user/911884/comments" target="_blank"
+                               class="hidden-xs ys-comments-user ys-comments-layout-x"><img
+                                    src="http://img.lkong.cn/avatar/000/91/18/84_avatar_small.jpg"
+                                    onerror="this.src='http://img.lkong.cn/avatar/noavatar_small.png';this.onerror=null;"
+                                    class="media-object img-rounded"></a>
+                            <div class="media-body">
+                                <h5 class="media-heading"><a
+                                        href="/user/911884/comments"
+                                        target="_blank">liyu101</a>
+                                    <small style="margin-left:1em;">
+                                        21 分钟前 评了<span class="num2star">5</span>
+                                    </small>
+                                </h5>
+                                <div class="ys-comments-message"><p>
+                                    我认为这是骁骑校最好的一本书。三军可夺帅,匹夫不可夺志也。一介屁民，当忍无可忍时的选择。影射你、我和社会，对上位者的棒喝。 </p>
+                                    <small>&nbsp;(本书评来自于 <a target="_blank"
+                                                            href="/book/14484">《匹夫的逆袭》 </a>)
+                                    </small>
+                                </div>
+                                <div data-cid="5b17415a6e7c5971660f6355"
+                                     role="group"
+                                     class="ys-comments-btns pull-right btn-group">
+                                    <button type="button"
+                                            onclick="ys.common.loveonecomment(this)"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-heart-o"></i>&nbsp;喜欢
+                                        <span class="num"> </span></button>
+                                    <button type="button"
+                                            onclick="ys.common.viewOneComment('5b17415a6e7c5971660f6355')"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-reply"></i>&nbsp;评论<span
+                                            class="num"> </span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="media ys-comments-left">
+                        <div style="margin-right:5px;" class="ys-comments-main">
+                            <a href="/user/846764/comments" target="_blank"
+                               class="hidden-xs ys-comments-user ys-comments-layout-x"><img
+                                    src="http://img.lkong.cn/avatar/000/84/67/64_avatar_small.jpg"
+                                    onerror="this.src='http://img.lkong.cn/avatar/noavatar_small.png';this.onerror=null;"
+                                    class="media-object img-rounded"></a>
+                            <div class="media-body">
+                                <h5 class="media-heading"><a
+                                        href="/user/846764/comments"
+                                        target="_blank">我猜你猜我</a>
+                                    <small style="margin-left:1em;">
+                                        23 分钟前 评了<span class="num2star">2</span>
+                                    </small>
+                                </h5>
+                                <div class="ys-comments-message"><p>
+                                    脑洞还可以，但是一开始的御手洗紫霞出戏 </p>
+                                    <small>&nbsp;(本书评来自于 <a target="_blank"
+                                                            href="/book/135129">《同时穿越了99个世界》 </a>)
+                                    </small>
+                                </div>
+                                <div data-cid="5b17410895907e896609f836"
+                                     role="group"
+                                     class="ys-comments-btns pull-right btn-group">
+                                    <button type="button"
+                                            onclick="ys.common.loveonecomment(this)"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-heart-o"></i>&nbsp;喜欢
+                                        <span class="num"> </span></button>
+                                    <button type="button"
+                                            onclick="ys.common.viewOneComment('5b17410895907e896609f836')"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-reply"></i>&nbsp;评论<span
+                                            class="num"> </span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="media ys-comments-left">
+                        <div style="margin-right:5px;" class="ys-comments-main">
+                            <a href="/user/860617/comments" target="_blank"
+                               class="hidden-xs ys-comments-user ys-comments-layout-x"><img
+                                    src="http://img.lkong.cn/avatar/000/86/06/17_avatar_small.jpg"
+                                    onerror="this.src='http://img.lkong.cn/avatar/noavatar_small.png';this.onerror=null;"
+                                    class="media-object img-rounded"></a>
+                            <div class="media-body">
+                                <h5 class="media-heading"><a
+                                        href="/user/860617/comments"
+                                        target="_blank">荧惑mars</a>
+                                    <small style="margin-left:1em;">
+                                        24 分钟前 评了<span class="num2star">4</span>
+                                    </small>
+                                </h5>
+                                <div class="ys-comments-message"><p>
+                                    <a href="/name/鹰扬拜占庭" target='_blank'>《鹰扬拜占庭》</a>和<a
+                                        href="/name/奥古斯都之路" target='_blank'>《奥古斯都之路》</a>的“口吻”，肯定让本土这些娇惯的读者老爷不习惯啦。苏拉还是那个苏拉，大唐也是那个大唐，主角却不是罗马元老！
+                                </p>
+                                    <small>&nbsp;(本书评来自于 <a target="_blank"
+                                                            href="/book/132701">《大唐官》 </a>)
+                                    </small>
+                                </div>
+                                <div data-cid="5b1740cdd19a13956638a923"
+                                     role="group"
+                                     class="ys-comments-btns pull-right btn-group">
+                                    <button type="button"
+                                            onclick="ys.common.loveonecomment(this)"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-heart-o"></i>&nbsp;喜欢
+                                        <span class="num"> </span></button>
+                                    <button type="button"
+                                            onclick="ys.common.viewOneComment('5b1740cdd19a13956638a923')"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-reply"></i>&nbsp;评论<span
+                                            class="num"> </span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="media ys-comments-left">
+                        <div style="margin-right:5px;" class="ys-comments-main">
+                            <a href="/user/860617/comments" target="_blank"
+                               class="hidden-xs ys-comments-user ys-comments-layout-x"><img
+                                    src="http://img.lkong.cn/avatar/000/86/06/17_avatar_small.jpg"
+                                    onerror="this.src='http://img.lkong.cn/avatar/noavatar_small.png';this.onerror=null;"
+                                    class="media-object img-rounded"></a>
+                            <div class="media-body">
+                                <h5 class="media-heading"><a
+                                        href="/user/860617/comments"
+                                        target="_blank">荧惑mars</a>
+                                    <small style="margin-left:1em;">
+                                        28 分钟前 评了<span class="num2star">4</span>
+                                    </small>
+                                </h5>
+                                <div class="ys-comments-message"><p>
+                                    作者不定时的懒惰，让本书的连贯性大打折扣。至于某些人说的什么杀流民，侮辱农民起义，投靠隋朝，天！前期铺垫，这群人一个字都没看。前期铺垫之后，主角以不是穿越者，是一个伪土著，有个人野心，有冷血无情，也有情有义，是在慢慢融入这个时代背景。这才是穿越，本来应该呈现的东西！ </p>
+                                    <small>&nbsp;(本书评来自于 <a target="_blank"
+                                                            href="/book/39433">《北雄》 </a>)
+                                    </small>
+                                </div>
+                                <div data-cid="5b173fdbd19a13956638a913"
+                                     role="group"
+                                     class="ys-comments-btns pull-right btn-group">
+                                    <button type="button"
+                                            onclick="ys.common.loveonecomment(this)"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-heart-o"></i>&nbsp;喜欢
+                                        <span class="num"> </span></button>
+                                    <button type="button"
+                                            onclick="ys.common.viewOneComment('5b173fdbd19a13956638a913')"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-reply"></i>&nbsp;评论<span
+                                            class="num"> </span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="media ys-comments-left">
+                        <div style="margin-right:5px;" class="ys-comments-main">
+                            <a href="/user/860617/comments" target="_blank"
+                               class="hidden-xs ys-comments-user ys-comments-layout-x"><img
+                                    src="http://img.lkong.cn/avatar/000/86/06/17_avatar_small.jpg"
+                                    onerror="this.src='http://img.lkong.cn/avatar/noavatar_small.png';this.onerror=null;"
+                                    class="media-object img-rounded"></a>
+                            <div class="media-body">
+                                <h5 class="media-heading"><a
+                                        href="/user/860617/comments"
+                                        target="_blank">荧惑mars</a>
+                                    <small style="margin-left:1em;">
+                                        33 分钟前 评了<span class="num2star">5</span>
+                                    </small>
+                                </h5>
+                                <div class="ys-comments-message"><p>
+                                    哈哈，说的现在不是民主集中制一样。好像很多人不是很懂什么叫人大代表和常务委员会，以及政治局常委。本书大赞！临高五百高贵的元老，我也想成为一员，这才是正常人的选择。 </p>
+                                    <small>&nbsp;(本书评来自于 <a target="_blank"
+                                                            href="/book/44639">《横扫晚清的无敌舰队》 </a>)
+                                    </small>
+                                </div>
+                                <div data-cid="5b173eaa95907e896609f817"
+                                     role="group"
+                                     class="ys-comments-btns pull-right btn-group">
+                                    <button type="button"
+                                            onclick="ys.common.loveonecomment(this)"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-heart-o"></i>&nbsp;喜欢
+                                        <span class="num"> </span></button>
+                                    <button type="button"
+                                            onclick="ys.common.viewOneComment('5b173eaa95907e896609f817')"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-reply"></i>&nbsp;评论<span
+                                            class="num"> </span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="media ys-comments-left">
+                        <div style="margin-right:5px;" class="ys-comments-main">
+                            <a href="/user/860617/comments" target="_blank"
+                               class="hidden-xs ys-comments-user ys-comments-layout-x"><img
+                                    src="http://img.lkong.cn/avatar/000/86/06/17_avatar_small.jpg"
+                                    onerror="this.src='http://img.lkong.cn/avatar/noavatar_small.png';this.onerror=null;"
+                                    class="media-object img-rounded"></a>
+                            <div class="media-body">
+                                <h5 class="media-heading"><a
+                                        href="/user/860617/comments"
+                                        target="_blank">荧惑mars</a>
+                                    <small style="margin-left:1em;">
+                                        36 分钟前 评了<span class="num2star">5</span>
+                                    </small>
+                                </h5>
+                                <div class="ys-comments-message"><p>
+                                    不知道为什么你们对统一大陆执念如此之深，为啥要统一？穿越了必须要统一？我觉得本书这些穿越者及其后代做出的选择才是符合正常逻辑和野望的！本书的重点在乎那个时代的全球背景，尤其是当时世界的中心-欧洲各国和依旧是火药桶的中东各国，之间的博弈和介绍，只有知道它们怎么崛起才能知道大清为何落后。 </p>
+                                    <small>&nbsp;(本书评来自于 <a target="_blank"
+                                                            href="/book/17132">《穿越1630之崛起南美》 </a>)
+                                    </small>
+                                </div>
+                                <div data-cid="5b173de1b150029b66bde0e9"
+                                     role="group"
+                                     class="ys-comments-btns pull-right btn-group">
+                                    <button type="button"
+                                            onclick="ys.common.loveonecomment(this)"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-heart-o"></i>&nbsp;喜欢
+                                        <span class="num"> </span></button>
+                                    <button type="button"
+                                            onclick="ys.common.viewOneComment('5b173de1b150029b66bde0e9')"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-reply"></i>&nbsp;评论<span
+                                            class="num"> </span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="media ys-comments-left">
+                        <div style="margin-right:5px;" class="ys-comments-main">
+                            <a href="/user/727492/comments" target="_blank"
+                               class="hidden-xs ys-comments-user ys-comments-layout-x"><img
+                                    src="http://img.lkong.cn/avatar/000/72/74/92_avatar_small.jpg"
+                                    onerror="this.src='http://img.lkong.cn/avatar/noavatar_small.png';this.onerror=null;"
+                                    class="media-object img-rounded"></a>
+                            <div class="media-body">
+                                <h5 class="media-heading"><a
+                                        href="/user/727492/comments"
+                                        target="_blank">清浊</a>
+                                    <small style="margin-left:1em;">
+                                        38 分钟前 评了<span class="num2star">2</span>
+                                    </small>
+                                </h5>
+                                <div class="ys-comments-message"><p>
+                                    开篇第一章主角让手下换上敌人的衣服混出宫去，呵呵，如果相互攻杀的两方是敌国还能说得过去，可是双方本来就是一家子啊，军服都是一样的，换了有个屁用啊。还有，五代十国上承大唐，主要以铜钱布匹为货币，主角开口闭口“银几两”，哎 </p>
+                                    <small>&nbsp;(本书评来自于 <a target="_blank"
+                                                            href="/book/146321">《五代十国少将军》 </a>)
+                                    </small>
+                                </div>
+                                <div data-cid="5b173d677ca9548f6608f81a"
+                                     role="group"
+                                     class="ys-comments-btns pull-right btn-group">
+                                    <button type="button"
+                                            onclick="ys.common.loveonecomment(this)"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-heart-o"></i>&nbsp;喜欢
+                                        <span class="num"> </span></button>
+                                    <button type="button"
+                                            onclick="ys.common.viewOneComment('5b173d677ca9548f6608f81a')"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-reply"></i>&nbsp;评论<span
+                                            class="num"> </span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="media ys-comments-left">
+                        <div style="margin-right:5px;" class="ys-comments-main">
+                            <a href="/user/860617/comments" target="_blank"
+                               class="hidden-xs ys-comments-user ys-comments-layout-x"><img
+                                    src="http://img.lkong.cn/avatar/000/86/06/17_avatar_small.jpg"
+                                    onerror="this.src='http://img.lkong.cn/avatar/noavatar_small.png';this.onerror=null;"
+                                    class="media-object img-rounded"></a>
+                            <div class="media-body">
+                                <h5 class="media-heading"><a
+                                        href="/user/860617/comments"
+                                        target="_blank">荧惑mars</a>
+                                    <small style="margin-left:1em;">
+                                        41 分钟前 评了<span class="num2star">4</span>
+                                    </small>
+                                </h5>
+                                <div class="ys-comments-message"><p>
+                                    从作者的一言半语中，作者这全球推理已经快到作者脑容量的极限。然而还是在坚持，肯定是想做的完美了。不过嘞，作者慢慢来，反正我的脑袋已经爆炸了。 </p>
+                                    <small>&nbsp;(本书评来自于 <a target="_blank"
+                                                            href="/book/2273">《权国》 </a>)
+                                    </small>
+                                </div>
+                                <div data-cid="5b173cda8182586b66cc39e0"
+                                     role="group"
+                                     class="ys-comments-btns pull-right btn-group">
+                                    <button type="button"
+                                            onclick="ys.common.loveonecomment(this)"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-heart-o"></i>&nbsp;喜欢
+                                        <span class="num"> 1  </span></button>
+                                    <button type="button"
+                                            onclick="ys.common.viewOneComment('5b173cda8182586b66cc39e0')"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-reply"></i>&nbsp;评论<span
+                                            class="num"> </span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="media ys-comments-left">
+                        <div style="margin-right:5px;" class="ys-comments-main">
+                            <a href="/user/611260/comments" target="_blank"
+                               class="hidden-xs ys-comments-user ys-comments-layout-x"><img
+                                    src="http://img.lkong.cn/avatar/000/61/12/60_avatar_small.jpg"
+                                    onerror="this.src='http://img.lkong.cn/avatar/noavatar_small.png';this.onerror=null;"
+                                    class="media-object img-rounded"></a>
+                            <div class="media-body">
+                                <h5 class="media-heading"><a
+                                        href="/user/611260/comments"
+                                        target="_blank">hzzyzxc</a>
+                                    <small style="margin-left:1em;">
+                                        43 分钟前 评了<span class="num2star">1</span>
+                                    </small>
+                                </h5>
+                                <div class="ys-comments-message"><p>
+                                    比赛哪里剧毒 </p>
+                                    <small>&nbsp;(本书评来自于 <a target="_blank"
+                                                            href="/book/129011">《我在日本当轻小说大师》 </a>)
+                                    </small>
+                                </div>
+                                <div data-cid="5b173c388182586b66cc39da"
+                                     role="group"
+                                     class="ys-comments-btns pull-right btn-group">
+                                    <button type="button"
+                                            onclick="ys.common.loveonecomment(this)"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-heart-o"></i>&nbsp;喜欢
+                                        <span class="num"> </span></button>
+                                    <button type="button"
+                                            onclick="ys.common.viewOneComment('5b173c388182586b66cc39da')"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-reply"></i>&nbsp;评论<span
+                                            class="num"> </span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="media ys-comments-left">
+                        <div style="margin-right:5px;" class="ys-comments-main">
+                            <a href="/user/860617/comments" target="_blank"
+                               class="hidden-xs ys-comments-user ys-comments-layout-x"><img
+                                    src="http://img.lkong.cn/avatar/000/86/06/17_avatar_small.jpg"
+                                    onerror="this.src='http://img.lkong.cn/avatar/noavatar_small.png';this.onerror=null;"
+                                    class="media-object img-rounded"></a>
+                            <div class="media-body">
+                                <h5 class="media-heading"><a
+                                        href="/user/860617/comments"
+                                        target="_blank">荧惑mars</a>
+                                    <small style="margin-left:1em;">
+                                        44 分钟前 评了<span class="num2star">5</span>
+                                    </small>
+                                </h5>
+                                <div class="ys-comments-message"><p>
+                                    主角啊，无所不知的民俗学家，至于种地，不能太深究……毕竟在大吃货帝国，这种地的学问可不是这么简单…… </p>
+                                    <small>&nbsp;(本书评来自于 <a target="_blank"
+                                                            href="/book/129207">《汉乡》 </a>)
+                                    </small>
+                                </div>
+                                <div data-cid="5b173c226e7c5971660f6323"
+                                     role="group"
+                                     class="ys-comments-btns pull-right btn-group">
+                                    <button type="button"
+                                            onclick="ys.common.loveonecomment(this)"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-heart-o"></i>&nbsp;喜欢
+                                        <span class="num"> </span></button>
+                                    <button type="button"
+                                            onclick="ys.common.viewOneComment('5b173c226e7c5971660f6323')"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-reply"></i>&nbsp;评论<span
+                                            class="num"> </span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="media ys-comments-left">
+                        <div style="margin-right:5px;" class="ys-comments-main">
+                            <a href="/user/1009126/comments" target="_blank"
+                               class="hidden-xs ys-comments-user ys-comments-layout-x"><img
+                                    src="http://img.lkong.cn/avatar/001/00/91/26_avatar_small.jpg"
+                                    onerror="this.src='http://img.lkong.cn/avatar/noavatar_small.png';this.onerror=null;"
+                                    class="media-object img-rounded"></a>
+                            <div class="media-body">
+                                <h5 class="media-heading"><a
+                                        href="/user/1009126/comments"
+                                        target="_blank">赵舒</a>
+                                    <small style="margin-left:1em;">
+                                        1 小时前 评了<span class="num2star">1</span>
+                                    </small>
+                                </h5>
+                                <div class="ys-comments-message"><p>
+                                    应该是女作者，逻辑很弱，很弱 </p>
+                                    <small>&nbsp;(本书评来自于 <a target="_blank"
+                                                            href="/book/136050">《木叶二鸣惊人》 </a>)
+                                    </small>
+                                </div>
+                                <div data-cid="5b173b86977535776655ee6b"
+                                     role="group"
+                                     class="ys-comments-btns pull-right btn-group">
+                                    <button type="button"
+                                            onclick="ys.common.loveonecomment(this)"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-heart-o"></i>&nbsp;喜欢
+                                        <span class="num"> </span></button>
+                                    <button type="button"
+                                            onclick="ys.common.viewOneComment('5b173b86977535776655ee6b')"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-reply"></i>&nbsp;评论<span
+                                            class="num"> </span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="media ys-comments-left">
+                        <div style="margin-right:5px;" class="ys-comments-main">
+                            <a href="/user/611260/comments" target="_blank"
+                               class="hidden-xs ys-comments-user ys-comments-layout-x"><img
+                                    src="http://img.lkong.cn/avatar/000/61/12/60_avatar_small.jpg"
+                                    onerror="this.src='http://img.lkong.cn/avatar/noavatar_small.png';this.onerror=null;"
+                                    class="media-object img-rounded"></a>
+                            <div class="media-body">
+                                <h5 class="media-heading"><a
+                                        href="/user/611260/comments"
+                                        target="_blank">hzzyzxc</a>
+                                    <small style="margin-left:1em;">
+                                        1 小时前 评了<span class="num2star">1</span>
+                                    </small>
+                                </h5>
+                                <div class="ys-comments-message"><p>
+                                    这他娘的写的是什么玩意儿？ </p>
+                                    <small>&nbsp;(本书评来自于 <a target="_blank"
+                                                            href="/book/45328">《道士留学生与阴阳师少女》 </a>)
+                                    </small>
+                                </div>
+                                <div data-cid="5b173b717ca9548f6608f7fe"
+                                     role="group"
+                                     class="ys-comments-btns pull-right btn-group">
+                                    <button type="button"
+                                            onclick="ys.common.loveonecomment(this)"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-heart-o"></i>&nbsp;喜欢
+                                        <span class="num"> </span></button>
+                                    <button type="button"
+                                            onclick="ys.common.viewOneComment('5b173b717ca9548f6608f7fe')"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-reply"></i>&nbsp;评论<span
+                                            class="num"> </span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="media ys-comments-left">
+                        <div style="margin-right:5px;" class="ys-comments-main">
+                            <a href="/user/860617/comments" target="_blank"
+                               class="hidden-xs ys-comments-user ys-comments-layout-x"><img
+                                    src="http://img.lkong.cn/avatar/000/86/06/17_avatar_small.jpg"
+                                    onerror="this.src='http://img.lkong.cn/avatar/noavatar_small.png';this.onerror=null;"
+                                    class="media-object img-rounded"></a>
+                            <div class="media-body">
+                                <h5 class="media-heading"><a
+                                        href="/user/860617/comments"
+                                        target="_blank">荧惑mars</a>
+                                    <small style="margin-left:1em;">
+                                        1 小时前 评了<span class="num2star">5</span>
+                                    </small>
+                                </h5>
+                                <div class="ys-comments-message"><p>
+                                    作者指天发誓不会推到姐姐后，我突然觉得，为啥没个姐姐！！！我要姐姐！！！
+                                    <br>背景在秦王大一统的时间节点，又蹭了点国宝档案的热点，“黑夫”“喜”等国宝档案里的人物在这本书栩栩如生，当“黑夫”有了姓氏之后，这本才是真正的情节开始吧。
+                                </p>
+                                    <small>&nbsp;(本书评来自于 <a target="_blank"
+                                                            href="/book/135633">《秦吏》 </a>)
+                                    </small>
+                                </div>
+                                <div data-cid="5b173af3c5cc148366c240cd"
+                                     role="group"
+                                     class="ys-comments-btns pull-right btn-group">
+                                    <button type="button"
+                                            onclick="ys.common.loveonecomment(this)"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-heart-o"></i>&nbsp;喜欢
+                                        <span class="num"> 2  </span></button>
+                                    <button type="button"
+                                            onclick="ys.common.viewOneComment('5b173af3c5cc148366c240cd')"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-reply"></i>&nbsp;评论<span
+                                            class="num"> </span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="media ys-comments-left">
+                        <div style="margin-right:5px;" class="ys-comments-main">
+                            <a href="/user/817215/comments" target="_blank"
+                               class="hidden-xs ys-comments-user ys-comments-layout-x"><img
+                                    src="http://img.lkong.cn/avatar/000/81/72/15_avatar_small.jpg"
+                                    onerror="this.src='http://img.lkong.cn/avatar/noavatar_small.png';this.onerror=null;"
+                                    class="media-object img-rounded"></a>
+                            <div class="media-body">
+                                <h5 class="media-heading"><a
+                                        href="/user/817215/comments"
+                                        target="_blank">鲍鱼</a>
+                                    <small style="margin-left:1em;">
+                                        1 小时前 评了<span class="num2star">1</span>
+                                    </small>
+                                </h5>
+                                <div class="ys-comments-message"><p>
+                                    说实话看起来一堆的破绽……要不是主角光环早GG了 </p>
+                                    <small>&nbsp;(本书评来自于 <a target="_blank"
+                                                            href="/book/118227">《连环杀手在美国》 </a>)
+                                    </small>
+                                </div>
+                                <div data-cid="5b1739c6977535776655ee58"
+                                     role="group"
+                                     class="ys-comments-btns pull-right btn-group">
+                                    <button type="button"
+                                            onclick="ys.common.loveonecomment(this)"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-heart-o"></i>&nbsp;喜欢
+                                        <span class="num"> </span></button>
+                                    <button type="button"
+                                            onclick="ys.common.viewOneComment('5b1739c6977535776655ee58')"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-reply"></i>&nbsp;评论<span
+                                            class="num"> </span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="media ys-comments-left">
+                        <div style="margin-right:5px;" class="ys-comments-main">
+                            <a href="/user/399304/comments" target="_blank"
+                               class="hidden-xs ys-comments-user ys-comments-layout-x"><img
+                                    src="http://img.lkong.cn/avatar/000/39/93/04_avatar_small.jpg"
+                                    onerror="this.src='http://img.lkong.cn/avatar/noavatar_small.png';this.onerror=null;"
+                                    class="media-object img-rounded"></a>
+                            <div class="media-body">
+                                <h5 class="media-heading"><a
+                                        href="/user/399304/comments"
+                                        target="_blank">saskey1</a>
+                                    <small style="margin-left:1em;">
+                                        1 小时前 评了<span class="num2star">3</span>
+                                    </small>
+                                </h5>
+                                <div class="ys-comments-message"><p>
+                                    主角利用自己NPC的身份和玩家互动 </p>
+                                    <small>&nbsp;(本书评来自于 <a target="_blank"
+                                                            href="/book/125539">《超神机械师》 </a>)
+                                    </small>
+                                </div>
+                                <div data-cid="5b1739bb977535776655ee54"
+                                     role="group"
+                                     class="ys-comments-btns pull-right btn-group">
+                                    <button type="button"
+                                            onclick="ys.common.loveonecomment(this)"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-heart-o"></i>&nbsp;喜欢
+                                        <span class="num"> </span></button>
+                                    <button type="button"
+                                            onclick="ys.common.viewOneComment('5b1739bb977535776655ee54')"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-reply"></i>&nbsp;评论<span
+                                            class="num"> </span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="media ys-comments-left">
+                        <div style="margin-right:5px;" class="ys-comments-main">
+                            <a href="/user/860617/comments" target="_blank"
+                               class="hidden-xs ys-comments-user ys-comments-layout-x"><img
+                                    src="http://img.lkong.cn/avatar/000/86/06/17_avatar_small.jpg"
+                                    onerror="this.src='http://img.lkong.cn/avatar/noavatar_small.png';this.onerror=null;"
+                                    class="media-object img-rounded"></a>
+                            <div class="media-body">
+                                <h5 class="media-heading"><a
+                                        href="/user/860617/comments"
+                                        target="_blank">荧惑mars</a>
+                                    <small style="margin-left:1em;">
+                                        1 小时前 评了<span class="num2star">5</span>
+                                    </small>
+                                </h5>
+                                <div class="ys-comments-message"><p>
+                                    主角的“姐姐”在哪里！！！ </p>
+                                    <small>&nbsp;(本书评来自于 <a target="_blank"
+                                                            href="/book/135633">《秦吏》 </a>)
+                                    </small>
+                                </div>
+                                <div data-cid="5b17396eb150029b66bde0bd"
+                                     role="group"
+                                     class="ys-comments-btns pull-right btn-group">
+                                    <button type="button"
+                                            onclick="ys.common.loveonecomment(this)"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-heart-o"></i>&nbsp;喜欢
+                                        <span class="num"> </span></button>
+                                    <button type="button"
+                                            onclick="ys.common.viewOneComment('5b17396eb150029b66bde0bd')"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-reply"></i>&nbsp;评论<span
+                                            class="num"> </span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="media ys-comments-left">
+                        <div style="margin-right:5px;" class="ys-comments-main">
+                            <a href="/user/741165/comments" target="_blank"
+                               class="hidden-xs ys-comments-user ys-comments-layout-x"><img
+                                    src="http://img.lkong.cn/avatar/000/74/11/65_avatar_small.jpg"
+                                    onerror="this.src='http://img.lkong.cn/avatar/noavatar_small.png';this.onerror=null;"
+                                    class="media-object img-rounded"></a>
+                            <div class="media-body">
+                                <h5 class="media-heading"><a
+                                        href="/user/741165/comments"
+                                        target="_blank">景佘</a>
+                                    <small style="margin-left:1em;">
+                                        1 小时前 评了<span class="num2star">3</span>
+                                    </small>
+                                </h5>
+                                <div class="ys-comments-message"><p>
+                                    其实我很喜欢这种描写基础建设、改变民众生活的种田文，但是本文作者的金手指太粗壮了，主角一个人就能改变世界，虽然也有道士的辅助，但是也太过夸张了。作为种田文应该详写的种田部分作者一个大跃进就直奔成果，少了奋斗的味道。将就看。 </p>
+                                    <small>&nbsp;(本书评来自于 <a target="_blank"
+                                                            href="/book/146320">《穿到古代的教书匠》 </a>)
+                                    </small>
+                                </div>
+                                <div data-cid="5b17393b7ca9548f6608f7de"
+                                     role="group"
+                                     class="ys-comments-btns pull-right btn-group">
+                                    <button type="button"
+                                            onclick="ys.common.loveonecomment(this)"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-heart-o"></i>&nbsp;喜欢
+                                        <span class="num"> </span></button>
+                                    <button type="button"
+                                            onclick="ys.common.viewOneComment('5b17393b7ca9548f6608f7de')"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-reply"></i>&nbsp;评论<span
+                                            class="num"> </span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="media ys-comments-left">
+                        <div style="margin-right:5px;" class="ys-comments-main">
+                            <a href="/user/979008/comments" target="_blank"
+                               class="hidden-xs ys-comments-user ys-comments-layout-x"><img
+                                    src="http://img.lkong.cn/avatar/000/97/90/08_avatar_small.jpg"
+                                    onerror="this.src='http://img.lkong.cn/avatar/noavatar_small.png';this.onerror=null;"
+                                    class="media-object img-rounded"></a>
+                            <div class="media-body">
+                                <h5 class="media-heading"><a
+                                        href="/user/979008/comments"
+                                        target="_blank">夜罗aaa</a>
+                                    <small style="margin-left:1em;">
+                                        1 小时前 评了<span class="num2star">5</span>
+                                    </small>
+                                </h5>
+                                <div class="ys-comments-message"><p>
+                                    虽然烟男笔下的亵渎和尘缘更虐，但论悲情当属李察，除了苏海伦，所有爱他的和他爱的差不多死了个干净 </p>
+                                    <small>&nbsp;(本书评来自于 <a target="_blank"
+                                                            href="/book/7075">《罪恶之城》 </a>)
+                                    </small>
+                                </div>
+                                <div data-cid="5b173882977535776655ee4a"
+                                     role="group"
+                                     class="ys-comments-btns pull-right btn-group">
+                                    <button type="button"
+                                            onclick="ys.common.loveonecomment(this)"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-heart-o"></i>&nbsp;喜欢
+                                        <span class="num"> </span></button>
+                                    <button type="button"
+                                            onclick="ys.common.viewOneComment('5b173882977535776655ee4a')"
+                                            style="width:50%;"
+                                            class="btn btn-default"><i
+                                            class="fa fa-reply"></i>&nbsp;评论<span
+                                            class="num"> </span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <a style="border:none;background-color: #eff6fa;color: #698ebf;"
+                   href="javascript:;"
+                   onclick="ys.common.jumpurl('t','1528248450')"
+                   class="btn btn-primary btn-block">点击加载下一页</a>
+                <div style="margin-bottom:2em;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="common-footer container">
+    <div style="margin-bottom:10px;overflow-x:hidden;"
+         class="visible-md-block visible-lg-block">
+        <script>(function () {
+            var s = "_" + Math.random().toString(36).slice(2);
+            document.write('<div id="' + s + '"></div>');
+            (window.slotbydup = window.slotbydup || []).push({
+                id: '2513407',
+                container: s,
+                size: '1138,66',
+                display: 'inlay-fix'
+            });
+        })();</script>
+    </div>
+    <div class="footer clearfix">
+        <ul>
+            <li><a href="/help">新手帮助</a></li>
+            <li><a href="/help/booklist">推书指南</a></li>
+            <li><a href="javascript:;" onclick="ys.common.feedback();">建议反馈</a>
+            </li>
+            <li><a href="#">移动应用</a></li>
+            <li class="bd dropdown">
+                <div aria-labelledby="yousuuBD" data-nohide="true"
+                     class="dropdown-menu"><p>商务合作请联系QQ：<span class='bold'>3323780180</span>
+                </p>
+                    <p>合作邮箱：bd@yousuu.com</p>
+                    <p>广告合作请联系QQ：<span class='bold'>780282553</span></p>
+                    <p>广告邮箱：ad@yousuu.com</p></div>
+                <a id="yousuuBD" href="#" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">商务合作</a></li>
+        </ul>
+        <span class="copy">© 2015 优书网</span>
+        <div><a target="_blank"
+                href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33010602000919"><img
+                src="http://www.beian.gov.cn/img/ghs.png">&nbsp;&nbsp;浙公网安备
+            33010602000919号</a></div>
+    </div>
+</div>
+<script src="//lib.baomitu.com/jquery/1.12.4/jquery.min.js"></script>
+<script src="//img.yousuu.com/js/bootstrap.min.js?v=0.0"></script>
+<script src="//lib.baomitu.com/moment.js/2.21.0/moment.min.js"></script>
+<script src="//lib.baomitu.com/moment.js/2.21.0/locale/zh-cn.js"></script>
+<script src="//img.yousuu.com/js/maxlength.js"></script>
+<script src="//lib.baomitu.com/underscore.js/1.8.3/underscore-min.js"></script>
+<script src="//img.yousuu.com/js/bootstrap-suggest.min.js"></script>
+<script src="//lib.baomitu.com/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+<script src="//lib.baomitu.com/bootstrap-treeview/1.2.0/bootstrap-treeview.min.js"></script>
+<script src="//img.yousuu.com/js/jquery.tagsinput.js"></script>
+<script src="//img.yousuu.com/js/jquery.placeholder.js"></script>
+<script src="//img.yousuu.com/js/jquery.stacktable.js"></script>
+<script src="//img.yousuu.com/js/application.js"></script>
+<script src="//img.yousuu.com/js/bootstrap-rating-input.min.js"></script>
+<script src="//img.yousuu.com/js/bootstrap-switch.min.js"></script>
+<script src="//img.yousuu.com/js/jquery.easypiechart.min.js"></script>
+<script src="//img.yousuu.com/js/toastr.min.js?v=12"></script>
+<script src="//img.yousuu.com/js/typeahead.js"></script>
+<script src="//img.yousuu.com/js/masonry.pkgd.min.js"></script>
+<script src="//lib.baomitu.com/peity/3.3.0/jquery.peity.min.js"></script>
+<script src="//img.yousuu.com/my.js?v=1422"></script>
+<script src="//img.yousuu.com/initshelf.js"></script>
+<script>$(function () {
+    ys.common.num2star($(".num2star"));
+    $("#switchViewComment").on("switchChange.bootstrapSwitch", function (ev, data) {
+        if (!data) $.cookie('cvMod', '1', {expires: 30, path: "/"});
+        else $.removeCookie('cvMod', {path: "/"});
+        setTimeout(function () {
+            location.href = window.location.href;
+        }, 300)
+    })
+})</script>
+<script>var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cspan style='display:none' id='cnzz_stat_icon_1254705611'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/stat.php%3Fid%3D1254705611%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>
+</body>
+</html>

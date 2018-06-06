@@ -30,7 +30,7 @@ class CommentspiderPipeline(object):
             book['rating'] = rating[index]
             book['cid'] = cid[index]
             book['commentList'] = commentList[index]
-            book['bookID'] = username[index]
+            book['bookID'] = bookID[index]
 
             book['currTime'] = currTime[index]
             book['postTime'] = postTime[index]
