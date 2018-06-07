@@ -2,20 +2,24 @@
 import scrapy
 import datetime
 import commentSpider.items as items
+import json
+import os.path
 
 
 class CommentSpider(scrapy.Spider):
     name = "bookComment"
-
     start_urls = ('http://www.yousuu.com/comments',)
+
+    jsonFile = open(os.path.dirname(__file__) + '/../../comments.json', encoding='utf-8')
+    firstLine = json.loads(jsonFile.readline())
+    prevCID = firstLine['cid']
 
     def parse(self, response):
         selector = scrapy.Selector(response)
         item = items.CommentSpiderItem()
         # read the link of next page button
         baseUrl = 'http://www.yousuu.com/comments?t='
-        pageInfo = selector.css("ul.pagination li a::attr(onclick)").extract()[
-            1]
+        pageInfo = selector.css("ul.pagination li a::attr(onclick)").extract()[1]
 
         # pageInfo sample: ys.common.jumpurl('t','1527969899')
         pageId = ''.join(c for c in pageInfo if c.isdigit())
@@ -84,6 +88,6 @@ class CommentSpider(scrapy.Spider):
 
         yield (item)
 
-        if pageInfo:
+        if pageInfo and self.prevCID not in cid:
             nextPageUrl = baseUrl + pageId
             yield scrapy.http.Request(nextPageUrl, callback=self.parse)
