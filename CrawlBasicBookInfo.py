@@ -34,14 +34,14 @@ def findLastBookId():
 # skip the book already in database.
 def scrapeBook(start):
     baseUrl = "http://www.yousuu.com/book/"
-    for index in range(start, 0, -1):
+    for index in range(start, 101000, -1):
         if index % 1000 == 0:
             print(index)
 
         # skip if book already in database
         if checkBookExist(index):
             print("read to ", str(index + 1))
-            break
+            continue
 
         # get the book link.
         currUrl = baseUrl + str(index)
@@ -57,11 +57,18 @@ def scrapeBook(start):
         aTag = address.find_all('a', href=True)
         name = soup.select_one("head > title")
         bookInfo = name.contents[0].__str__().replace(' ', '').split('-')
+        bookSummary = soup.find("div", class_='panel-body', text=True)
+        if bookSummary:
+            textSummary = bookSummary.text
+        else:
+            textSummary = 'no summary'
+
         # store in database
         books.insert({'bookId': index,
                       'bookName': bookInfo[0],
                       'author': bookInfo[1],
-                      'bookLink': aTag[0]['href']})
+                      'bookLink': aTag[0]['href'],
+                      'bookSummary': textSummary})
 
 
 def main():
