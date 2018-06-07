@@ -34,7 +34,7 @@ def findLastBookId():
 # skip the book already in database.
 def scrapeBook(start):
     baseUrl = "http://www.yousuu.com/book/"
-    for index in range(start, 101000, -1):
+    for index in range(49000, 0, -1):
         if index % 1000 == 0:
             print(index)
 
