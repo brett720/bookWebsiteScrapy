@@ -10,9 +10,13 @@ class CommentSpider(scrapy.Spider):
     name = "bookComment"
     start_urls = ('http://www.yousuu.com/comments',)
 
-    jsonFile = open(os.path.dirname(__file__) + '/../../comments.json', encoding='utf-8')
-    firstLine = json.loads(jsonFile.readline())
-    prevCID = firstLine['cid']
+    readTo = open('readToCID', 'r')
+
+    firstLine = readTo.readline()
+    firstLine = '5b178e5b95907e896609fb32'
+    storeTheFirstCID = True
+    readLastPage = True
+    readTo.close()
 
     def parse(self, response):
         selector = scrapy.Selector(response)
@@ -88,6 +92,14 @@ class CommentSpider(scrapy.Spider):
 
         yield (item)
 
-        if pageInfo and self.prevCID not in cid:
+        if self.storeTheFirstCID:
+            self.storeTheFirstCID = False
+            writeHistoryStopPoint = open('readToCID', 'w')
+            writeHistoryStopPoint.write(cid[0])
+            writeHistoryStopPoint.close()
+
+        if pageInfo and self.readLastPage is True:
+            if self.firstLine in cid:
+                self.readLastPage = False
             nextPageUrl = baseUrl + pageId
             yield scrapy.http.Request(nextPageUrl, callback=self.parse)

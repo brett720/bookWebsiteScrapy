@@ -34,14 +34,14 @@ def findLastBookId():
 # skip the book already in database.
 def scrapeBook(start):
     baseUrl = "http://www.yousuu.com/book/"
-    for index in range(49000, 0, -1):
+    for index in range(start, 0, -1):
         if index % 1000 == 0:
             print(index)
 
         # skip if book already in database
         if checkBookExist(index):
             print("read to ", str(index + 1))
-            continue
+            break
 
         # get the book link.
         currUrl = baseUrl + str(index)
