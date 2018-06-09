@@ -21,6 +21,8 @@ USER_AGENT = 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:45.0) Gecko/20100101 Firefo
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
+
+# add unicode
 FEED_EXPORT_ENCODING = 'utf-8'
 
 # FEED_URI = u'file:///F://workspace/bookWebsiteScrapy/comments.csv'

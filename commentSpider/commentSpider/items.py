@@ -10,7 +10,7 @@ import scrapy
 
 class CommentSpiderItem(scrapy.Item):
     # define the fields for your item here like:
-    # name = scrapy.Field()
+
     username = scrapy.Field()
     uid = scrapy.Field()
     rating = scrapy.Field()

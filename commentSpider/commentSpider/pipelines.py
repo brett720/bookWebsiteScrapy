@@ -34,6 +34,7 @@ class CommentSpiderPipeline(object):
             book['currTime'] = currTime[index]
             book['postTime'] = postTime[index]
 
+            # write in file as multiple json dictionary format
             curr = json.dumps(dict(book), ensure_ascii=False) + '\n'
             self.file.write(curr)
 

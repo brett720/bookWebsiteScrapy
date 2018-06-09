@@ -8,10 +8,18 @@ class CommentSpider(scrapy.Spider):
     name = "bookComment"
     start_urls = ('http://www.yousuu.com/comments',)
 
+    # using cid to mark a stop point that avoiding huge duplicate reading
+    # Every time, read the stop string [cid] from local file.
     readTo = open('readToCID', 'r')
-
     firstLine = readTo.readline()
+
+    # when program run, it stores the first book in local file, and then
+    # continue. Therefore, when running program next time,
+    # it stops at same point.
     storeTheFirstCID = True
+
+    # since each page has 40 books, to avoiding miss on book, it read the next
+    # page also to trade off small number of duplicate.
     readLastPage = True
     readTo.close()
 
@@ -52,7 +60,7 @@ class CommentSpider(scrapy.Spider):
 
         # get time string and curr time.
         postTime = []
-        currTimeList = []
+
         timeList = selector.css("h5.media-heading small::text").extract()
         for s in timeList:
             s = s.replace("\n", "")
@@ -89,12 +97,14 @@ class CommentSpider(scrapy.Spider):
 
         yield (item)
 
+        # store the first book information when program run
         if self.storeTheFirstCID:
             self.storeTheFirstCID = False
             writeHistoryStopPoint = open('readToCID', 'w')
             writeHistoryStopPoint.write(cid[0])
             writeHistoryStopPoint.close()
 
+        # check if there is no next page or page has read before
         if pageInfo and self.readLastPage is True:
             if self.firstLine in cid:
                 self.readLastPage = False

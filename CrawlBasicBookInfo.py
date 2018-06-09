@@ -20,19 +20,25 @@ def checkBookExist(bookId):
 
 # find the latest book id.
 def findLastBookId():
+    # overall url
     allCategoryUrl = "http://www.yousuu.com/category/all"
     pageData = requests.get(allCategoryUrl).text
     soup = BeautifulSoup(pageData, 'lxml')
+
+    # get the latest bookid
     latest = soup.select_one("div[class=post]")
     bookLink = latest.contents[0].__str__()
     pattern = re.compile('\d+')
     lastBook = pattern.findall(bookLink)
+
+    # return book id
     return int(lastBook[0])
 
 
 # scrape book from latest book to the earliest,
 # skip the book already in database.
 def scrapeBook(start):
+    # start url
     baseUrl = "http://www.yousuu.com/book/"
     for index in range(start, 0, -1):
         if index % 1000 == 0:
@@ -57,6 +63,8 @@ def scrapeBook(start):
         aTag = address.find_all('a', href=True)
         name = soup.select_one("head > title")
         bookInfo = name.contents[0].__str__().replace(' ', '').split('-')
+
+        # get the summary of book.
         bookSummary = soup.find("div", class_='panel-body', text=True)
         if bookSummary:
             textSummary = bookSummary.text
