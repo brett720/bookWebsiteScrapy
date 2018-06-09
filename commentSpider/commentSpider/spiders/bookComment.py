@@ -2,8 +2,6 @@
 import scrapy
 import datetime
 import commentSpider.items as items
-import json
-import os.path
 
 
 class CommentSpider(scrapy.Spider):
@@ -13,7 +11,6 @@ class CommentSpider(scrapy.Spider):
     readTo = open('readToCID', 'r')
 
     firstLine = readTo.readline()
-    firstLine = '5b178e5b95907e896609fb32'
     storeTheFirstCID = True
     readLastPage = True
     readTo.close()
