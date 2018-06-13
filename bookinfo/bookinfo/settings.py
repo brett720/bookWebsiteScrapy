@@ -14,6 +14,7 @@ BOT_NAME = 'bookinfo'
 SPIDER_MODULES = ['bookinfo.spiders']
 NEWSPIDER_MODULE = 'bookinfo.spiders'
 
+USER_AGENT = 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'bookinfo (+http://www.yourdomain.com)'

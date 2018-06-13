@@ -5,16 +5,16 @@ import bookinfo.items as items
 
 class bookinfo(scrapy.Spider):
     name = "bookinfo"
-    #start_urls = ('http://www.yousuu.com/category/all',)
-    start_urls = ('http://www.yousuu.com/book/145126',)
+    start_urls = ('http://www.yousuu.com/category/all',)
+    #start_urls = ('http://www.yousuu.com/book/123525',)
     base_url = 'http://www.yousuu.com/book/'
-    start = False
-
+    startFromBeginning = True
+    currPage = -2
     def parse(self, response):
         selector = scrapy.Selector(response)
         item = items.BookinfoItem()
-        if self.start:
-            self.start = False
+        if self.startFromBeginning:
+            self.startFromBeginning = False
 
             latestBookID = selector.css("div.post a::attr(href)").extract()
             startFrom = 'http://yousuu.com' + latestBookID[0]
@@ -23,19 +23,22 @@ class bookinfo(scrapy.Spider):
         else:
             centralBlock = selector.css("div.center-block::text").extract()
 
-            currUrl = response.request.url
-            currBookID = int(''.join(c for c in currUrl if c.isdigit()))
-            nextUrl = self.base_url + str(currBookID - 1)
+            if self.currPage == -2:
+                currUrl = response.request.url
+                self.currPage = int(''.join(c for c in currUrl if c.isdigit()))
+
+            self.currPage -= 1
+            nextUrl = self.base_url + str(self.currPage)
 
             # center-block class exists, the url is invalid for book information
-            if currBookID < 1:
+            if self.currPage == -1:
                 return
 
             if centralBlock:
                 yield scrapy.http.Request(nextUrl, callback=self.parse)
             else:
                 # book id
-                item['bid'] = str(currBookID)
+                item['bid'] = str(self.currPage + 1)
 
                 # book tags
                 item['tags'] = selector.css("div.sokk-book-buttons::attr(data-tags)").extract()
