@@ -60,17 +60,17 @@ class bookinfo(scrapy.Spider):
                 # get author name.
                 author = selector.css("ul.list-unstyled li a::text").extract()
                 if not author:
-                    authorName = author[0]
-                else:
                     authorName = ''
+                else:
+                    authorName = author[0]
                 item['authorName'] = authorName
 
                 # get summary
                 summaryContent = selector.css("div.panel-body::text").extract()
                 if not summaryContent:
-                    summary = summaryContent[0]
-                else:
                     summary = ''
+                else:
+                    summary = summaryContent[0]
                 item['summary'] = summary
 
                 yield (item)
