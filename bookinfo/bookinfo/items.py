@@ -11,4 +11,16 @@ import scrapy
 class BookinfoItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
+    wordCount = scrapy.Field()
+    chapterCount = scrapy.Field()
+    sourceWebsite = scrapy.Field()
+    updateTime = scrapy.Field()
+    latestUpdateChap = scrapy.Field()
+    authorName = scrapy.Field()
+    summary = scrapy.Field()
+    tags = scrapy.Field()
+    bookImage = scrapy.Field()
+    bookName = scrapy.Field()
+    bid = scrapy.Field()
+
     pass
