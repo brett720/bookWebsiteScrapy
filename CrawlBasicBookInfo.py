@@ -44,7 +44,7 @@ def scrapeBook(start):
         if index % 1000 == 0:
             print(index)
 
-        # skip if book already in database
+        #skip if book already in database
         if checkBookExist(index):
             print("read to ", str(index + 1))
             break
@@ -71,7 +71,7 @@ def scrapeBook(start):
         else:
             textSummary = 'no summary'
 
-        # store in database
+        store in database
         books.insert({'bookId': index,
                       'bookName': bookInfo[0],
                       'author': bookInfo[1],
