@@ -5,9 +5,10 @@ import bookinfo.items as items
 
 class bookinfo(scrapy.Spider):
     name = "bookinfo"
-    start_urls = ('http://www.yousuu.com/category/all',)
+    #start_urls = ('http://www.yousuu.com/category/all',)
+    start_urls = ('http://www.yousuu.com/book/145126',)
     base_url = 'http://www.yousuu.com/book/'
-    start = True
+    start = False
 
     def parse(self, response):
         selector = scrapy.Selector(response)
@@ -55,9 +56,22 @@ class bookinfo(scrapy.Spider):
                 item['sourceWebsite'] = basicInfo[3][4:]
                 item['updateTime'] = basicInfo[4][6:]
                 item['latestUpdateChap'] = basicInfo[5][6:]
-                item['authorName'] = selector.css("ul.list-unstyled li a::text").extract()[0]
 
-                item['summary'] = selector.css("div.panel-body::text").extract()[0]
+                # get author name.
+                author = selector.css("ul.list-unstyled li a::text").extract()
+                if not author:
+                    authorName = author[0]
+                else:
+                    authorName = ''
+                item['authorName'] = authorName
+
+                # get summary
+                summaryContent = selector.css("div.panel-body::text").extract()
+                if not summaryContent:
+                    summary = summaryContent[0]
+                else:
+                    summary = ''
+                item['summary'] = summary
 
                 yield (item)
 
