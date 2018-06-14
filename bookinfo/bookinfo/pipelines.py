@@ -19,5 +19,4 @@ class BookinfoPipeline(object):
         curr = json.dumps(book, ensure_ascii=False) + '\n'
         self.file.write(curr)
 
-
         return item

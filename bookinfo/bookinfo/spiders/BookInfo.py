@@ -1,15 +1,15 @@
 import scrapy
-import datetime
 import bookinfo.items as items
 
 
 class bookinfo(scrapy.Spider):
     name = "bookinfo"
     start_urls = ('http://www.yousuu.com/category/all',)
-    #start_urls = ('http://www.yousuu.com/book/123525',)
+    #start_urls = ('http://www.yousuu.com/book/19118',)
     base_url = 'http://www.yousuu.com/book/'
     startFromBeginning = True
     currPage = -2
+
     def parse(self, response):
         selector = scrapy.Selector(response)
         item = items.BookinfoItem()

@@ -11,6 +11,7 @@
 
 BOT_NAME = 'bookinfo'
 
+DUPEFILTER_CLASS = 'scrapy.dupefilters.BaseDupeFilter'
 SPIDER_MODULES = ['bookinfo.spiders']
 NEWSPIDER_MODULE = 'bookinfo.spiders'
 
