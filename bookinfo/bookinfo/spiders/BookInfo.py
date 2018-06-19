@@ -41,7 +41,11 @@ class bookinfo(scrapy.Spider):
                 item['bid'] = str(self.currPage + 1)
 
                 # book tags
-                item['tags'] = selector.css("div.sokk-book-buttons::attr(data-tags)").extract()
+                tag = selector.css("div.sokk-book-buttons a::text").extract()
+                if not tag:
+                    item['tags'] = '无标签'
+                else:
+                    item['tags'] = tag[0]
 
                 # get the url of book avatar
                 item['bookImage'] = selector.css("img.bookavatar::attr(src)").extract()[0]
